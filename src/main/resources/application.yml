@@ -1,0 +1,50 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /regbsser
+
+uri: ${URI}
+
+bootstrap-file:
+bootstrap:
+  file: ${BOOTSTRAP_FILE}
+  api-version: ${BOOTSTRAP_API_VERSION}
+
+environment:
+  name: ${ENV_NAME}
+  contact: ${ENV_CONTACT}
+
+spring:
+  jackson:
+    time-zone: UTC
+    date-format: yyyy-MM-dd'T'HH:mm:ssX
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    default-property-inclusion: NON_NULL
+
+logging:
+  file:
+    name: ./logs/provider-bs-service.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7
+
+# Local profile
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+uri: http://localhost:8080/regbsser
+bootstrap:
+  api-version: 2.2
+  file: classpath:bootstrap/registries.json
+  image-file: classpath:bootstrap/images.json
+
+environment:
+  name: development
+  contact: peter.caluwaert@bosa.fgov.be
+
+logging.level.be.bosa: TRACE

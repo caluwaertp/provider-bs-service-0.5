@@ -1,0 +1,163 @@
+{
+  "items": [
+    {
+      "id": "bosa:info-messages:ebox",
+      "name": {
+        "nl": "BOSA INFO",
+        "fr": "BOSA INFO",
+        "de": "BOSA INFO"
+      },
+      "description": {
+        "nl": "BOSA Ebox Document Provider for informational messages",
+        "fr": "BOSA Ebox Document Provider for informational messages",
+        "de": "BOSA Ebox Document Provider for informational messages"
+      },
+      "endpoints": [
+        {
+          "url": "https://public.int.fedservices.be/api/federated-ebox-info-dp/2.1/citizen/hip",
+          "activationDate": "2020-03-05",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.1"
+        },
+        {
+          "url": "https://public.int.fedservices.be/api/federated-ebox-info-dp/2.2/citizen/hip",
+          "activationDate": "2021-09-15",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.2"
+        },
+        {
+          "url": "https://public.int.fedservices.be/api/federated-ebox-info-dp/2.4/citizen/hip",
+          "activationDate": "2021-09-15",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.4"
+        }
+      ]
+    },
+    {
+      "id": "bosa:dp-citizen:ebox",
+      "name": {
+        "nl": "BOSA DP",
+        "fr": "BOSA DP",
+        "de": "BOSA DP"
+      },
+      "description": {
+        "nl": "BOSA Ebox Document Provider",
+        "fr": "BOSA Ebox Document Provider",
+        "de": "BOSA Ebox Document Provider"
+      },
+      "endpoints": [
+        {
+          "url": "https://public.int.fedservices.be/api/federated-ebox-dp/2.1/hip",
+          "activationDate": "2019-07-15",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.1"
+        },
+        {
+          "url": "https://public.int.fedservices.be/api/federated-ebox-dp/2.2/hip",
+          "activationDate": "2019-07-15",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.2"
+        },
+        {
+          "url": "https://public.int.fedservices.be/api/federated-ebox-dp/2.4/hip",
+          "activationDate": "2019-07-15",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.4"
+        }
+      ]
+    },
+    {
+      "id": "sfpd:broker-citizen:ebox",
+      "name": {
+        "nl": "SFPD DP",
+        "fr": "SFPD DP",
+        "de": "SFPD DP"
+      },
+      "description": {
+        "nl": "SFPD Ebox Document Provider",
+        "fr": "SFPD Ebox Document Provider",
+        "de": "SFPD Ebox Document Provider"
+      },
+      "endpoints": [
+        {
+          "url": "https://acc.services.sfpd.fgov.be/sfpd-broker/ebox/v2.1",
+          "activationDate": "2020-03-27",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.1"
+        },
+        {
+          "url": "https://acc.services.sfpd.fgov.be/sfpd-broker/ebox/v2.2",
+          "activationDate": "2020-03-27",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.2"
+        }
+      ]
+    },
+    {
+      "id": "socialsecurity:citizen-rest:ebox",
+      "name": {
+        "nl": "eBox Sociale zekerheid",
+        "fr": "eBox Sécurité sociale",
+        "de": "eBox Soziale Sicherheit"
+      },
+      "description": {
+        "nl": "MessageProvider voor de sociale zekerheid",
+        "fr": "MessageProvider pour la sécurité sociale",
+        "de": "MessageProvider für den sozialen Sicherheit"
+      },
+      "endpoints": [
+        {
+          "url": "https://services-acpt.socialsecurity.be/REST/ebox/citizen/messageRegistry/v2",
+          "activationDate": "2019-07-15",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "citizenfedbox@smals.be",
+          "apiVersion": "2.1"
+        },
+        {
+          "url": "https://services-acpt.socialsecurity.be/REST/ebox/citizen/messageRegistry/v2",
+          "activationDate": "2019-07-15",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "citizenfedbox@smals.be",
+          "apiVersion": "2.2"
+        }
+      ]
+    },
+    {
+      "id": "vo:dp-citizen:ebox",
+      "name": {
+        "nl": "MAGDA Citizen DP",
+        "fr": "MAGDA Citizen DP",
+        "de": "MAGDA Citizen DP"
+      },
+      "description": {
+        "nl": "MAGDA Citizen Ebox Document Provider",
+        "fr": "MAGDA Citizen Ebox Document Provider",
+        "de": "MAGDA Citizen Ebox Document Provider"
+      },
+      "endpoints": [
+        {
+          "url": "https://iv.api.tni-vlaanderen.be/api/v1/ebox",
+          "activationDate": "2020-03-18",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.1"
+        },
+        {
+          "url": "https://iv.api.tni-vlaanderen.be/api/v1/ebox",
+          "activationDate": "2020-03-18",
+          "deactivationDate": "2100-12-01",
+          "technicalContact": "",
+          "apiVersion": "2.2"
+        }
+      ]
+    }
+  ]
+}

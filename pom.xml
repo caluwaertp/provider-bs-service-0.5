@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>be.bosa.ebox</groupId>
+    <artifactId>provider-bs-service-0.5</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>provider-bs-service-0.5</name>
+    <description>Federated Ebox Message Registry (Citizen and Enterprise) Service</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.2</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <!-- === Project build settings === -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <default.package>be.bosa.ebox.providerbsservice</default.package>
+
+        <!-- === Dependency versions === -->
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <swagger.codegen.version>2.4.20</swagger.codegen.version>
+        <cqengine.version>3.6.0</cqengine.version>
+        <common-rest-ng.version>3.1</common-rest-ng.version>
+
+        <!-- === Sonar === -->
+        <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.coverage.exclusions>
+            src/main/java/be/bosa/ebox/registrybsservice/**/*,
+            src/main/java/be/bosa/ebox/providerbsservice/ProviderBsServiceApplication.java
+            src/main/java/be/bosa/ebox/providerbsservice/api/model/**/*
+        </sonar.coverage.exclusions>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>be.bosa.dp</groupId>
+            <artifactId>common-rest-ng</artifactId>
+            <version>${common-rest-ng.version}</version>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- CQEngine -->
+        <dependency>
+            <groupId>com.googlecode.cqengine</groupId>
+            <artifactId>cqengine</artifactId>
+            <version>${cqengine.version}</version>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>maven-ecosystem</id>
+            <url>https://devops.digital.belgium.be/nexus/repository/maven-ecosystem/</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <!-- [ maven-compiler-plugin ] -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <!-- [ spring-boot-maven-plugin ] -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- [ swagger-codegen-maven-plugin ] -->
+            <plugin>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>${swagger.codegen.version}</version>
+                <executions>
+                    <!-- Generate REST default interface from Swagger -->
+                    <execution>
+                        <id>provider-bs-service</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/swagger/provider-bs-service.yml</inputSpec>
+                            <language>spring</language>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <modelPackage>${default.package}.api.model</modelPackage>
+                                <configPackage>${default.package}.api.config</configPackage>
+                                <apiPackage>${default.package}.api</apiPackage>
+                                <dateLibrary>legacy</dateLibrary>
+                                <java8>true</java8>
+                            </configOptions>
+                            <templateDirectory>${project.basedir}/src/main/resources/swagger/mustache</templateDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>registry-bs-service</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/swagger/registry-bs-service.yml</inputSpec>
+                            <modelNamePrefix>RegBs</modelNamePrefix>
+                            <language>java</language>
+                            <library>resttemplate</library>
+                            <generateApis>false</generateApis>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <modelPackage>be.bosa.ebox.registrybsservice.api.model</modelPackage>
+                                <configPackage>be.bosa.ebox.registrybsservice.api.config</configPackage>
+                                <apiPackage>be.bosa.ebox.registrybsservice.api.api</apiPackage>
+                                <dateLibrary>legacy</dateLibrary>
+                                <java8>true</java8>
+                            </configOptions>
+                            <templateDirectory>${project.basedir}/src/main/resources/swagger/mustache</templateDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- [ Build with swagger generated code as sources ] -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/swagger</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- [ maven-clean-plugin ] -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>logs</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>maven-ecosystem-release</id>
+            <url>https://devops.digital.belgium.be/nexus/repository/maven-ecosystem</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-ecosystem-snapshot</id>
+            <url>https://devops.digital.belgium.be/nexus/repository/maven-ecosystem-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
